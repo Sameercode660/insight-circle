@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String          @id @default(uuid())
+  name          String
+  email         String          @unique
+  password      String
+  upgraded      Boolean         @default(false)
+  planType      String          @default("FREE")
+  planStartDate DateTime?
+  planEndDate   DateTime?
+  Message       Message[]
+  EngagedMentor EngagedMentor[]
+  Subscription  Subscription[]
+  createdAt     DateTime        @default(now()) 
+  updatedAt     DateTime        @updatedAt
+}
+
+model Admin {
+  id       String @id @default(uuid())
+  name     String
+  email    String @unique
+  password String
+  createdAt     DateTime        @default(now()) 
+  updatedAt     DateTime        @updatedAt
+}
+
+model Mentor {
+  id             String          @id @default(uuid())
+  name           String
+  email          String          @unique
+  password       String
+  profilePicture String          @default("https://www.cgg.gov.in/wp-content/uploads/2017/10/dummy-profile-pic-male1.jpg")
+  bio            String
+  isActive       Boolean         @default(true)
+  expertIn       String
+  mentorType     String          @default("FREE")
+  Message        Message[]
+  EngagedMentor  EngagedMentor[]
+  createdAt     DateTime        @default(now()) 
+  updatedAt     DateTime        @updatedAt
+}
+
+model Message {
+  id       String @id @default(uuid())
+  message  String
+  userId   String
+  mentorId String
+  user     User   @relation(fields: [userId], references: [id])
+  mentor   Mentor @relation(fields: [mentorId], references: [id])
+  createdAt     DateTime        @default(now()) 
+  updatedAt     DateTime        @updatedAt
+}
+
+model EngagedMentor {
+  id       String @id @default(uuid())
+  userId   String
+  mentorId String
+  user     User   @relation(fields: [userId], references: [id])
+  mentor   Mentor @relation(fields: [mentorId], references: [id])
+  createdAt     DateTime        @default(now()) 
+  updatedAt     DateTime        @updatedAt
+}
+
+model Subscription {
+  id             String           @id @default(uuid())
+  subscriptionId  String
+  userId         String
+  subscription   SubscriptionList @relation(fields: [subscriptionId], references: [id])
+  user           User             @relation(fields: [userId], references: [id])
+  createdAt     DateTime        @default(now()) 
+  updatedAt     DateTime        @updatedAt
+}
+
+model SubscriptionList {
+  id              String         @id @default(uuid())
+  subcriptionName String
+  Benefits        String
+  amount          Int
+  Subscription    Subscription[]
+  createdAt     DateTime        @default(now()) 
+  updatedAt     DateTime        @updatedAt
+}

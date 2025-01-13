@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "module": "commonjs", // Compatible with Node.js
+    "strict": true,       // Enable all strict type-checking options
+    "esModuleInterop": true, // Allow default imports from CommonJS modules
+    "skipLibCheck": true, // Skip type-checking for library declarations
+    "target": "ESNext",   // Modern target for better performance
+    "lib": ["dom", "dom.iterable", "esnext"], // Add DOM and ES features
+    "allowJs": true,      // Allow JavaScript files to be imported
+    "noEmit": true,       // Avoid emitting compiled files, Next.js handles this
+    "moduleResolution": "node", // Use Node.js module resolution
+    "resolveJsonModule": true, // Enable importing JSON files
+    "isolatedModules": true, // Ensure each file is treated as a separate module
+    "jsx": "preserve",    // Preserve JSX, handled by Next.js
+    "incremental": true,  // Speed up subsequent builds by storing incremental cache
+    "paths": {
+      "@/*": ["./src/*"] // Alias for `src` directory
+    },
+    "plugins": [
+      {
+        "name": "next" // Next.js-specific TypeScript plugin
+      }
+    ]
+  },
+  "include": [
+    "next-env.d.ts", // Default Next.js environment types
+    "**/*.ts",       // Include TypeScript files
+    "**/*.tsx",      // Include TSX files
+    ".next/types/**/*.ts", // Next.js generated types
+    "server.ts"      // Include the custom server file
+  ],
+  "exclude": ["node_modules"] // Exclude dependencies
+}
