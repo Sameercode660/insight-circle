@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Interface</title>
+    <link rel="stylesheet" href="chat.css">
+</head>
+
+<body>
+    <div class="chat-container">
+        <header class="chat-header">
+            <h1>Chat with Us</h1>
+        </header>
+        <div class="chat-window" id="chat-window">
+            <div class="message received">
+                <p>Hello! How can I assist you today?</p>
+                <span class="timestamp">10:00 AM</span>
+            </div>
+        </div>
+        <form class="chat-input-area" id="chat-form">
+            <input type="text" id="chat-input" placeholder="Type your message..." required>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    <script src="chat.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InsightCircle</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="Home.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"
+      integrity="sha512-8BHxHDLsOHx+flIrQ0DrZcea7MkHqRU5GbTHmbdzMRnAaoCIkZ97PqZcXJkKZckMMhqfoeaJE+DNUVuyoQsO3Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="logo">
+          <h1 style="display: flex; align-items: center; gap: 10px">
+            <img
+              src="./image/logo.jpg"
+              alt="InsightCircle Logo"
+              style="width: 100px; border-radius: 25px"
+            />
+            InsightCircle
+          </h1>
+        </div>
+        <nav class="navbar">
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#mentors">Mentors</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="cta-buttons">
+          <a href="./Auth/Login.html" class="btn-primary">Log-in</a>
+          <a href="./Auth/Signup.html" class="btn-secondary">sign-up</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Empowering Your Journey to Success</h1>
+        <p>
+          Personalized mentoring and expert counseling to help you achieve your
+          dreams.
+        </p>
+        <div class="hero-buttons">
+          <a href="./Auth/GetS.html" class="btn-primary">Get Started</a>
+          <a href="./Auth/LearnM.html" class="btn-secondary"
+            >Learn More</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <section class="about light-theme" id="about">
+      <div class="container">
+        <div class="about-content">
+          <h2>About Us</h2>
+          <p>
+            Unlock Your Potential with InsightCircle Personalized mentoring and
+            expert counseling to help you achieve your goals. Connect with
+            seasoned mentors and take charge of your career, academics, and
+            personal growth.
+          </p>
+          <p>
+            Your Journey to Success Starts Here At InsightCircle, we provide
+            tailored guidance through experienced mentors across diverse fields.
+            Empowering individuals to excel in every aspect of their lives.
+          </p>
+          <p>
+            Empower. Grow. Achieve. InsightCircle offers personalized mentoring
+            and expert counseling to support your career, academic, and personal
+            aspirations. Start your journey today!
+          </p>
+        </div>
+        <div class="about-image">
+          <img
+            src="./image/About-Mentoring.jpg"
+            alt="Mentoring and Counseling"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <div class="container">
+        <h2>Our Services</h2>
+        <p class="section-description">
+          We offer a range of personalized services to help you achieve your
+          goals and excel in every aspect of your journey.
+        </p>
+        <div class="service-cards">
+          <div class="service-card">
+            <a href="/Frontend/M-Services/Academic-Mentoring.html">
+              <i class="service-icon fas fa-user-graduate"></i>
+            </a>
+            <h3>Academic Mentoring</h3>
+            <p>
+              Get guidance from experts to excel in your academics and achieve
+              top performance in your field.
+            </p>
+          </div>
+          <div class="service-card">
+            <a href="/Frontend/M-Services/Career-Counseling.html">
+              <i class="service-icon fas fa-briefcase"></i>
+            </a>
+            <h3>Career Counseling</h3>
+            <p>
+              Plan your career with clarity and make informed decisions to
+              achieve your professional dreams.
+            </p>
+          </div>
+          <div class="service-card">
+            <a href="/Frontend/M-Services/Personal-Development.html">
+              <i class="service-icon fas fa-heart"></i>
+            </a>
+            <h3>Personal Development</h3>
+            <p>
+              Enhance your personal growth and overcome challenges with expert
+              mentoring and support.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <h2>What Our Users Say</h2>
+        <p class="section-description">
+          Here’s what our users have to say about InsightCircle's mentoring and
+          counseling services.
+        </p>
+        <div class="testimonial-cards">
+          <div class="testimonial-card">
+            <p class="testimonial-text">
+              "InsightCircle has been a game-changer in my career. The mentors
+              here provide personalized guidance that truly works!"
+            </p>
+            <div class="testimonial-author">
+              <img src="./image/1user.webp" alt="User 1" />
+              <div>
+                <h3>John Doe</h3>
+                <p>Software Engineer</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">
+              "Thanks to InsightCircle, I found clarity in my academic goals and
+              achieved the success I was striving for!"
+            </p>
+            <div class="testimonial-author">
+              <img src="./image/2user.jpg" alt="User 2" />
+              <div>
+                <h3>Jane Smith</h3>
+                <p>Graduate Student</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">
+              "The personal development sessions helped me overcome challenges
+              and grow immensely as a person."
+            </p>
+            <div class="testimonial-author">
+              <img src="./image/3user.jpg" alt="User 3" />
+              <div>
+                <h3>Kevin Johnson</h3>
+                <p>Entrepreneur</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mentors" id="mentors">
+      <div class="container">
+        <h2>Meet Our Mentors</h2>
+        <p class="section-description">
+          Our experienced mentors are here to guide you every step of the way.
+          Learn from the best to achieve your goals.
+        </p>
+        <div class="mentor-cards">
+          <div class="mentor-card">
+            <img src="./image/mentor1.jpg" alt="Mentor 1" />
+            <h3>Dr. Sam Johnson</h3>
+            <p class="mentor-title">Career Strategist</p>
+            <p class="mentor-bio">
+              With over 10 years of experience in career counseling, Dr. Sarah
+              has helped hundreds of professionals find their true calling.
+            </p>
+          </div>
+          <div class="mentor-card">
+            <img src="./image/mentor2.jpg" alt="Mentor 2" />
+            <h3>James Lee</h3>
+            <p class="mentor-title">Technology Mentor</p>
+            <p class="mentor-bio">
+              A seasoned tech expert, Michael specializes in guiding students
+              and professionals in cloud computing and AI.
+            </p>
+          </div>
+          <div class="mentor-card">
+            <img src="./image/mentor3.jpg" alt="Mentor 3" />
+            <h3>Emily Carter</h3>
+            <p class="mentor-title">Personal Growth Coach</p>
+            <p class="mentor-bio">
+              Emily is passionate about helping individuals overcome challenges
+              and unlock their full potential.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="how-it-works" id="how-it-works">
+      <div class="container">
+        <h2>How It Works</h2>
+        <p class="section-description">
+          Getting started with InsightCircle is simple. Follow these three steps
+          and begin your journey towards success!
+        </p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Sign Up</h3>
+            <p>
+              Create an account and tell us about your goals and preferences.
+            </p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Choose a Mentor</h3>
+            <p>
+              Browse through our mentors and select the one best suited to your
+              needs.
+            </p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Start Learning</h3>
+            <p>
+              Begin your personalized mentoring sessions and achieve your goals.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing light-theme" id="pricing">
+      <div class="container">
+        <h2>Our Pricing Plans</h2>
+        <p class="section-description">
+          Choose a plan that suits your needs and start your journey today.
+        </p>
+        <div class="pricing-cards">
+          <div class="pricing-card">
+            <h3>Basic Plan</h3>
+            <p class="price">₹1,699/month</p>
+            <ul>
+              <li>Access to all resources</li>
+              <li>1 mentoring session/month</li>
+              <li>Email support</li>
+            </ul>
+            <a href="/Frontend/Auth/Signup.html"
+              ><button>Get Started</button></a
+            >
+          </div>
+          <div class="pricing-card featured">
+            <h3>Pro Plan</h3>
+            <p class="price">₹2,499/month</p>
+            <ul>
+              <li>All Basic features</li>
+              <li>4 mentoring sessions/month</li>
+              <li>Priority support</li>
+            </ul>
+            <a href="/Frontend/Auth/Signup.html"
+              ><button>Get Started</button></a
+            >
+          </div>
+          <div class="pricing-card">
+            <h3>Premium Plan</h3>
+            <p class="price">₹3,999/month</p>
+            <ul>
+              <li>All Pro features</li>
+              <li>Unlimited mentoring sessions</li>
+              <li>Dedicated mentor</li>
+            </ul>
+            <a href="/Frontend/Auth/Signup.html"
+              ><button>Get Started</button></a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="blog light-theme" id="blog">
+      <div class="container">
+        <h2>From Our Blog</h2>
+        <p class="section-description">
+          Explore our latest articles, tips, and resources to help you excel in
+          your personal and professional life.
+        </p>
+        <div class="blog-cards">
+          <div class="blog-card">
+            <img src="./image/blog1.jpg" alt="Blog 1" />
+            <h3>5 Steps to Kickstart Your Career</h3>
+            <p class="blog-snippet">
+              Learn the essential steps to take your career to the next level
+              with actionable advice from experts.
+            </p>
+            <a href="/Frontend/Blog/Blog1.html" class="read-more">Read More</a>
+          </div>
+          <div class="blog-card">
+            <img src="./image/blog2.jpg" alt="Blog 2" />
+            <h3>Top Skills for Cloud Computing</h3>
+            <p class="blog-snippet">
+              Discover the most in-demand skills in cloud computing and how to
+              acquire them to boost your career.
+            </p>
+            <a href="/Frontend/Blog/Blog2.html" class="read-more">Read More</a>
+          </div>
+          <div class="blog-card">
+            <img src="./image/blog3.jpg" alt="Blog 3" />
+            <h3>Mastering Time Management</h3>
+            <p class="blog-snippet">
+              Time management is key to success. Here’s how to organize your day
+              for maximum productivity.
+            </p>
+            <a href="./Frontend/Blog/Blog3.html" class="read-more">Read More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact light-theme" id="contact">
+      <div class="container">
+        <h2>Contact Us</h2>
+        <p class="section-description">
+          Have any questions? Reach out to us, and we’ll get back to you as soon
+          as possible.
+        </p>
+        <div class="contact-content">
+          <div class="contact-form">
+            <form action="#" method="POST">
+              <input type="text" name="name" placeholder="Your Name" required />
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                required
+              />
+              <textarea
+                name="message"
+                rows="5"
+                placeholder="Your Message"
+                required
+              ></textarea>
+              <button type="submit">Send Message</button>
+            </form>
+          </div>
+          <div class="contact-info">
+            <h3>Get in Touch</h3>
+            <p>
+              Email:
+              <a href="mailto:contact@insightcircle.com"
+                >contact@insightcircle.com</a
+              >
+            </p>
+            <p>Phone: <a href="tel:+1234567890">+91 9999 9999 99</a></p>
+            <p>Address: 123 Insight Street, Cloud City, CC 56789</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer light-theme">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <h2>InsightCircle</h2>
+            <p>Your trusted platform for mentoring and counseling.</p>
+          </div>
+          <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#blog">Blog</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-social">
+            <h3>Follow Us</h3>
+            <ul class="social-icons">
+              <li>
+                <a
+                  href="https://www.facebook.com"
+                  target="_blank"
+                  aria-label="Facebook"
+                >
+                  <i class="fa-brands fa-facebook"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.twitter.com"
+                  target="_blank"
+                  aria-label="Twitter"
+                >
+                  <i class="fa-brands fa-twitter"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com"
+                  target="_blank"
+                  aria-label="LinkedIn"
+                >
+                  <i class="fa-brands fa-linkedin"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.instagram.com"
+                  target="_blank"
+                  aria-label="Instagram"
+                >
+                  <i class="fa-brands fa-instagram"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 InsightCircle. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+        const socket = io('http://localhost:3000');
+
+        socket.on('connect', () => {
+            console.log('Connected to the server!');
+        })
+    </script>
+  </body>
+</html>

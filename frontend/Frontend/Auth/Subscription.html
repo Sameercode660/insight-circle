@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Form - InsightCircle</title>
+    <link rel="stylesheet" href="Subscription.css">
+</head>
+
+<body>
+    <section class="subscription-form-page">
+        <div class="container">
+            <header class="main-header">
+                <h1 class="main-heading">InsightCircle</h1>
+            </header>
+            <header class="page-header">
+                <h2 class="brand-heading">Subscription Form</h2>
+                <p>Choose your subscription plan and complete the payment to get started.</p>
+            </header>
+            <form action="thankyou.html" method="post" class="subscription-form">
+                <div class="form-group">
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                </div>
+                <div class="form-group">
+                    <label for="subscription-type">Select Subscription Type:</label>
+                    <select id="subscription-type" name="subscription_type" required>
+                        <option value="basic">Basic Plan - ₹1,699/month</option>
+                        <option value="standard">Standard Plan - ₹2,499/month</option>
+                        <option value="premium">Premium Plan - ₹3,999/month</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="total-amount">Total Amount:</label>
+                    <input type="text" id="total-amount" name="total_amount" placeholder="₹0.00" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="upi-id">UPI ID:</label>
+                    <input type="text" id="upi-id" name="upi_id" placeholder="Enter your UPI ID" required>
+                </div>
+                <button type="submit" class="submit-btn">Proceed to Payment</button>
+            </form>
+        </div>
+    </section>
+</body>
+
+</html>
