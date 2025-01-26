@@ -19,6 +19,8 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+   
   </head>
 
   <body>
@@ -43,8 +45,8 @@
           </ul>
         </nav>
         <div class="cta-buttons">
-          <a href="./Auth/Login.html" class="btn-primary">Log-in</a>
-          <a href="./Auth/Signup.html" class="btn-secondary">sign-up</a>
+          <button class="btn-primary btn-login">Log-in</button>
+          <a href="./Auth/Signup.html" class="btn-secondary btn-signup">sign-up</a>
         </div>
       </div>
     </header>
@@ -57,10 +59,8 @@
           dreams.
         </p>
         <div class="hero-buttons">
-          <a href="./Auth/GetS.html" class="btn-primary">Get Started</a>
-          <a href="./Auth/LearnM.html" class="btn-secondary"
-            >Learn More</a
-          >
+          <button class="btn-primary get-started">Get Started</button>
+          <a href="./Auth/LearnM.html" class="btn-secondary">Learn More</a>
         </div>
       </div>
     </section>
@@ -451,12 +451,15 @@
         </div>
       </div>
     </footer>
-    <script>
-        const socket = io('http://localhost:3000');
 
-        socket.on('connect', () => {
-            console.log('Connected to the server!');
-        })
+
+    <script src="Home.js"></script>
+    <script>
+      const socket = io("http://localhost:3000");
+
+      socket.on("connect", () => {
+        console.log("Connected to the server!");
+      });
     </script>
   </body>
 </html>

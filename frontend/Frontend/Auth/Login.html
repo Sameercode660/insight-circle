@@ -1,40 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InsightCircle - Login</title>
-    <link rel="stylesheet" href="Login.css">
-</head>
+    <link rel="stylesheet" href="Login.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
 
-<body>
+  <body>
     <section class="login-page">
-        <div class="container">
-            <h1 class="brand-heading">InsightCircle</h1>
-            <h2>Login</h2>
-            <p>Log in to your account as a Mentor or Mentee to continue your journey with InsightCircle.</p>
-            <form action="#" class="login-form">
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                </div>
-                <div class="form-group">
-                    <label for="role">Login As</label>
-                    <select id="role" name="role" required>
-                        <option value="mentee">Mentee</option>
-                        <option value="mentor">Mentor</option>
-                    </select>
-                </div>
-                <button type="submit" class="login-btn">Login</button>
-                <p class="new-account">Don't have an account? <a href="/Frontend/Auth/">Sign up here</a></p>
-            </form>
+      <div class="container">
+        <h1 class="brand-heading">InsightCircle</h1>
+        <h2>Login</h2>
+        <p>
+          Log in to your account as a Mentor or Mentee to continue your journey
+          with InsightCircle.
+        </p>
+        <div action="#" class="login-form">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="role">Login As</label>
+            <select id="role" name="role" required>
+              <option value="mentee">Mentee</option>
+              <option value="mentor">Mentor</option>
+            </select>
+          </div>
+          <button type="submit" class="login-btn">Login</button>
+          <p class="new-account">
+            Don't have an account? <a href="./Signup.html">Sign up here</a>
+          </p>
         </div>
+      </div>
     </section>
-</body>
 
+    <!-- API integration  -->
+
+    <script>
+      const loginBtn = document.querySelector(".login-btn");
+      const email = document.getElementById("email");
+      const password = document.getElementById("password");
+      const role = document.getElementById("role");
+
+      async function menteeLogin() {
+
+        loginBtn.innerHTML = "Loading...";
+
+        const data = {
+          email: email.value,
+          password: password.value,
+        };
+
+        const response = await axios.post(
+          "http://localhost:3000/api/user/auth/login",
+          data
+        );
+
+        if (response.data.status == false) {
+          alert("Login failed!Please try again");
+          localStorage.setItem("login", false);
+        }
+        loginBtn.innerHTML = "Login";
+        localStorage.setItem("login", true);
+        window.location.href = "../Home.html";
+      }
+
+      async function mentorLogin() {
+        loginBtn.innerHTML = "Loading...";
+        const data = {
+          email: email.value,
+          password: password.value,
+          role: role.value,
+        };
+
+        const response = await axios.post(
+          "http://localhost:3000/api/user/auth/login",
+          data
+        );
+
+        if (response.data.status == false) {
+          alert("Login failed!Please try again");
+          localStorage.setItem("login", false);
+        }
+        loginBtn.innerHTML = "Login";
+        localStorage.setItem("login", true);
+        localStorage.setItem("name", response.data.data.name);
+        window.location.href = "../Home.html";
+      }
+
+      loginBtn.addEventListener("click", async () => {
+        if (role.value == "mentee") {
+          menteeLogin();
+        } else {
+          mentorLogin();
+        }
+      });
+    </script>
+  </body>
 </html>
