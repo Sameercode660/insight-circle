@@ -1,17 +1,19 @@
 import { NextResponse, NextRequest } from "next/server";
 import { PrismaClient } from "@prisma/client";
+import TotalMentee from "@/components/TotalMentee";
 
 const prisma = new PrismaClient()
 
 export async function GET() {
     try {
-        const mentorList = await prisma.mentor.findMany({})
+        const totalMentee = await prisma.user.findMany({})
 
-        if(!mentorList) {
-            return NextResponse.json({statusCode: 404, message: 'Not any mentor is found', status: false})
+        if(!totalMentee) {
+            return NextResponse.json({statusCode: 400, message: 'Mentee List is empty', status: false})
         }
 
-        return NextResponse.json({statusCode: 200, message: 'Mentor fetched successfully', data: mentorList, status: true})
+        return NextResponse.json({statusCode: 200, message: 'Mentee fetched successfully', data: totalMentee, status: true})
+
     } catch (error) {
         let errorMessage = "An unexpected error occurred";
 

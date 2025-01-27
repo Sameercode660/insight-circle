@@ -13,6 +13,16 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({statusCode: 400, message: 'Anyone field is empty', status: false})
         }
 
+        const checkMentor = await prisma.mentor.findUnique({
+            where: {
+                email
+            }
+        })
+
+        if(checkMentor) {
+            return NextResponse.json({statusCode: 400, message: 'Mentor already exists', status: false})
+        }
+
         const mentor = await prisma.mentor.create({
             data: {
                 name, 
