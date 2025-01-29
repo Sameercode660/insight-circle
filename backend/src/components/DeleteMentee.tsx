@@ -1,6 +1,32 @@
-import React from 'react'
+'use client'
+
+import axios from 'axios'
+import React, { useState } from 'react'
 
 function DeleteMentee() {
+
+  const [email, setEmail] = useState('')
+  const [laoding, setLoading] = useState(false)
+
+  async function deleteMentee(e: any) {
+    e.preventDefault()
+    try {
+      setLoading(true)
+      const response = await axios.post('http://localhost:3000/api/admin/delete-mentee', {email})
+      setLoading(false)
+
+      console.log(response.data)
+
+      if(response.data.status == true) {
+        alert(response.data.message)
+      } else {
+        alert(response.data.message)
+      }
+    } catch (error) {
+      console.log(error)
+      alert('Unable to delete Mentee')
+    }
+  }
   return (
     <div className="flex justify-center items-center h-screen bg-gray-50">
       <div className="w-full max-w-md shadow-lg rounded-2xl bg-white">
@@ -12,6 +38,10 @@ function DeleteMentee() {
                 Email
               </label>
               <input
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value)
+                }}
                 id="email"
                 type="email"
                 placeholder="Enter mentee's email"
@@ -19,9 +49,9 @@ function DeleteMentee() {
               />
             </div>
             <button
-              type="submit"
+              onClick={deleteMentee}
               className="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md">
-              Delete
+              {laoding ? 'Deleting...': 'Delete'}
             </button>
           </form>
         </div>

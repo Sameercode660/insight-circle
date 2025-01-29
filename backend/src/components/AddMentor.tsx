@@ -11,6 +11,7 @@ function AddMentor() {
   const [bio, setBio] = useState('')
   const [expertIn, setExpertIn] = useState('')
   const [mentorType, setMentorType] = useState('FREE')
+  const [loading, setLoading] = useState(false)
 
   async function handleAddMentor() {
     try {
@@ -25,8 +26,9 @@ function AddMentor() {
       }
 
       console.log(data)
-
+      setLoading(true)
       const response = await axios.post('http://localhost:3000/api/admin/add-mentor', data)
+      setLoading(false)
 
       console.log(response.data)
 
@@ -35,6 +37,10 @@ function AddMentor() {
         setName('')
         setEamil('')
         setPassword('')
+        setBio('')
+        setProfilePicture('')
+        setExpertIn('')
+        setMentorType('')
       } else {
         alert("Something went wrong in adding member")
       }
@@ -131,7 +137,7 @@ function AddMentor() {
             onClick={handleAddMentor}
             className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow-lg"
           >
-            Add Mentor
+            {loading ? 'Adding...' : 'Add Mentor'}
           </button>
         </div>
       </div>

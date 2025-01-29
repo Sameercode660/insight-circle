@@ -1,13 +1,13 @@
 'use client'
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { FormEvent, useState } from 'react'
 
 function DeleteMentor() {
 
   const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState('')
   
-  async function handleDeleteMentor(e) {
+  async function handleDeleteMentor(e: FormEvent) {
     e.preventDefault()
     try {
       
