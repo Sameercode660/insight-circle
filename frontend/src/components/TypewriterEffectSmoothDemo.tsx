@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import SectionHeading from "./Heading";
 import { TypewriterEffectSmooth } from "./ui/typewriter-effect";
 export function TypewriterEffectSmoothDemo() {
@@ -7,7 +8,7 @@ export function TypewriterEffectSmoothDemo() {
       text: "Take",
     },
     {
-      text: "From",
+      text: "Advice From",
     },
     {
       text: "Us",
@@ -20,6 +21,8 @@ export function TypewriterEffectSmoothDemo() {
       className: "text-blue-500 dark:text-blue-500",
     },
   ];
+
+  const router = useRouter()
   return (
     <div className="flex flex-col items-center justify-center h-[40rem]  ">
       <SectionHeading title="Connect with Us"></SectionHeading>
@@ -28,10 +31,17 @@ export function TypewriterEffectSmoothDemo() {
       </p>
       <TypewriterEffectSmooth words={words} />
       <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 space-x-0 md:space-x-4">
-        <button className="w-40 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm">
+        <button
+        onClick={() => {
+          router.push('/services')
+        }}
+        className="w-40 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm">
           Join now
         </button>
-        <button className="w-40 h-10 rounded-xl bg-white text-black border border-black  text-sm">
+        <button 
+        onClick={() => {
+          router.push('/auth/signup')
+        }} className="w-40 h-10 rounded-xl bg-white text-black border border-black  text-sm">
           Signup
         </button>
       </div>

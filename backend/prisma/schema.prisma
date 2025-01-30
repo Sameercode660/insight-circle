@@ -12,6 +12,7 @@ model User {
   name          String
   email         String          @unique
   password      String
+  otp           String?
   upgraded      Boolean         @default(false)
   planType      String          @default("FREE")
   planStartDate DateTime?

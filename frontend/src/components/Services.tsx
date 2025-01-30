@@ -1,8 +1,14 @@
+'use client'
+
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FaUser, FaCalendarAlt, FaClock, FaStar, FaLock } from "react-icons/fa";
 import { MdWork, MdEmail, MdPhone } from "react-icons/md";
 
 const MentorshipPage = () => {
+
+  const router = useRouter()
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -87,10 +93,12 @@ const MentorshipPage = () => {
             Connect with experienced mentors who can help you achieve your goals
           </p>
           <button
-            
+            onClick={() => {
+              router.push('/mentor-list')
+            }}
             className="bg-white text-blue-600 dark:text-blue-800 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 dark:hover:bg-gray-700 transition duration-300"
           >
-            Book Your Session
+            Chat with Us
           </button>
         </div>
       </div>

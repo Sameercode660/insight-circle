@@ -1,5 +1,6 @@
 import { NextResponse, NextRequest } from 'next/server'
 import { PrismaClient } from '@prisma/client'
+import sendOTP from '@/utils/sendOtp'
 
 const prisma = new PrismaClient()
 
@@ -28,7 +29,13 @@ export async function POST(req: NextRequest) {
                 password: password,
             }
         })
+        
+        const otp = Math.floor(100000 + Math.random() * 900000)
 
+        const sendOtpStatus = await sendOTP({recipientEmail: email, otp: otp.toString()})
+
+        console.log(sendOtpStatus)
+        
         if(!user) {
             return NextResponse.json({statusCode: 400, message: "Unable to create user", status: false})
         }
