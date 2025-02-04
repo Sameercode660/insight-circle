@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import { PlaceholdersAndVanishInput } from "./ui/placeholders-and-vanish-input";
 
 export function PlaceholdersAndVanishInputDemo() {
@@ -14,9 +15,30 @@ export function PlaceholdersAndVanishInputDemo() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
   };
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("submitted");
+    try {
+      const data: any = {
+        question: e.target[0].value,
+        userName: localStorage.getItem('name'),
+        userId: localStorage.getItem('id'),
+        email: localStorage.getItem('email'),
+      }
+      console.log(data)
+
+      const response = await axios.post('http://localhost:3000/api/user/ask-question', data)
+
+      console.log(response.data)
+
+      if(response.data.status === true) {
+        alert('Question submitted successfully')
+      } else {
+        alert('unable to send the question')
+      }
+    } catch (error) {
+      console.log(error);
+      alert('unable to send the question')
+    }
   };
   return (
     <div className="h-[40rem] flex flex-col justify-center  items-center px-4">

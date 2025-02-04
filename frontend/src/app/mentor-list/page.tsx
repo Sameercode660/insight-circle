@@ -1,8 +1,15 @@
+'use client'
 import SectionHeading from '@/components/Heading'
 import { ThreeDCardDemo } from '@/components/ThreeDCardDemo'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 function page() {
+     const router = useRouter()
+
+    if(localStorage.getItem('isLogin') === 'false'){
+        router.push('/auth/login')
+    }
     return (
         <>
             <SectionHeading title='Chat with our mentors'></SectionHeading>

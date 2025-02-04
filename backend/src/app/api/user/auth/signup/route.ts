@@ -6,7 +6,12 @@ const prisma = new PrismaClient()
 
 export async function POST(req: NextRequest) {
     try {
-        const {name, email, password} = await req.json()
+        // const {name, email, password} = await req.json()
+        const body = await req.json()
+
+        console.log(body)
+
+        const {name, email, password} = body
 
         if(!name || !email || !password) {
             return NextResponse.json({statusCode: 400, message: "All fields are required", status: false})
@@ -36,13 +41,19 @@ export async function POST(req: NextRequest) {
 
         console.log(sendOtpStatus)
         
+        await prisma.user.update({ 
+            where: { id: user.id }, 
+            data: { otp: otp.toString() } 
+        })
+
         if(!user) {
             return NextResponse.json({statusCode: 400, message: "Unable to create user", status: false})
         }
 
         return NextResponse.json({statusCode: 200, message: "User created successfully", data: user,status: true})
 
-    } catch (error) {
+    } catch (error: any) {
+        console.log(error)
         return NextResponse.json({statusCode: 500, message: 'Unable to create user', status: false})
     }
 }

@@ -21,7 +21,7 @@ export default function Home() {
       <SectionHeading title="Our Mentors"></SectionHeading>
       <AnimatedTestimonialsDemo></AnimatedTestimonialsDemo>
       <InfiniteMovingCardsDemo></InfiniteMovingCardsDemo>
-      <LampDemo></LampDemo>
+      {/* <LampDemo></LampDemo> */}
       <PlaceholdersAndVanishInputDemo></PlaceholdersAndVanishInputDemo>
       <TextGenerateEffectDemo></TextGenerateEffectDemo>
       <TextRevealCardPreview></TextRevealCardPreview>

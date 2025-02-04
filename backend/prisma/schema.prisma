@@ -20,17 +20,18 @@ model User {
   Message       Message[]
   EngagedMentor EngagedMentor[]
   Subscription  Subscription[]
-  createdAt     DateTime        @default(now()) 
+  createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
+  askedQuestion askedQuestion[]
 }
 
 model Admin {
-  id       String @id @default(uuid())
-  name     String
-  email    String @unique
-  password String
-  createdAt     DateTime        @default(now()) 
-  updatedAt     DateTime        @updatedAt
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Mentor {
@@ -45,39 +46,39 @@ model Mentor {
   mentorType     String          @default("FREE")
   Message        Message[]
   EngagedMentor  EngagedMentor[]
-  createdAt     DateTime        @default(now()) 
-  updatedAt     DateTime        @updatedAt
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
 }
 
 model Message {
-  id       String @id @default(uuid())
-  message  String
-  userId   String
-  mentorId String
-  user     User   @relation(fields: [userId], references: [id])
-  mentor   Mentor @relation(fields: [mentorId], references: [id])
-  createdAt     DateTime        @default(now()) 
-  updatedAt     DateTime        @updatedAt
+  id        String   @id @default(uuid())
+  message   String
+  userId    String
+  mentorId  String
+  user      User     @relation(fields: [userId], references: [id])
+  mentor    Mentor   @relation(fields: [mentorId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model EngagedMentor {
-  id       String @id @default(uuid())
-  userId   String
-  mentorId String
-  user     User   @relation(fields: [userId], references: [id])
-  mentor   Mentor @relation(fields: [mentorId], references: [id])
-  createdAt     DateTime        @default(now()) 
-  updatedAt     DateTime        @updatedAt
+  id        String   @id @default(uuid())
+  userId    String
+  mentorId  String
+  user      User     @relation(fields: [userId], references: [id])
+  mentor    Mentor   @relation(fields: [mentorId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Subscription {
   id             String           @id @default(uuid())
-  subscriptionId  String
+  subscriptionId String
   userId         String
   subscription   SubscriptionList @relation(fields: [subscriptionId], references: [id])
   user           User             @relation(fields: [userId], references: [id])
-  createdAt     DateTime        @default(now()) 
-  updatedAt     DateTime        @updatedAt
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
 }
 
 model SubscriptionList {
@@ -86,6 +87,15 @@ model SubscriptionList {
   Benefits        String
   amount          Int
   Subscription    Subscription[]
-  createdAt     DateTime        @default(now()) 
-  updatedAt     DateTime        @updatedAt
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+}
+
+model askedQuestion {
+  id       String @id @default(uuid())
+  question String
+  userName String
+  userId   String
+  email    String
+  user     User   @relation(fields: [userId], references: [id])
 }

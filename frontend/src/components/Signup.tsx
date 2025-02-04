@@ -8,34 +8,47 @@ import axios from 'axios'
 
 export function SignupFormDemo() {
 
-    const router = useRouter()
+  const router = useRouter()
 
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
 
-    async function handleSignup() {
-      try {
-        const data = {
-          name, 
-          email,
-          password
-        }
-
-        if(!name || !email || !password) {
-          alert('Anyone field is empty')
-          return
-        }
-
-        const response = await axios.post('http://localhost:3000/api/user/auth/signup')
-
-        console.log(response.data)
-      } catch (error) {
-        console.log(error)
-        alert('Unable to login')
+  async function handleSignup() {
+    try {
+      const data = {
+        name,
+        email,
+        password
       }
+
+      if (!name || !email || !password) {
+        alert('Anyone field is empty')
+        return
+      }
+      setLoading(true)
+      const response = await axios.post('http://localhost:3000/api/user/auth/signup', data)
+      setLoading(false)
+
+      console.log(response.data)
+
+      if (response.data.status === true) {
+        localStorage.setItem('id', response.data.data.id)
+        localStorage.setItem('name', response.data.data.name)
+        localStorage.setItem('isLogin', "true")
+        router.push('/auth/otp')
+      } else {
+        alert(response.data.message)
+      }
+
+    } catch (error) {
+      setLoading(false)
+      console.log(error)
+      alert('Unable to login')
     }
-   
+  }
+
   return (
     <div className="mt-20 mb-20 max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
@@ -62,13 +75,20 @@ export function SignupFormDemo() {
             setPassword(e.target.value)
           }} id="password" placeholder="••••••••" type="password" />
         </LabelInputContainer>
-        <button
-        onClick={handleSignup}
-          className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
-        >
-          Sign up &rarr;
-          <BottomGradient />
-        </button>
+        {
+          loading ? (<button
+            className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+          >
+            Loading... &rarr;
+            <BottomGradient />
+          </button>) : (<button
+            onClick={handleSignup}
+            className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+          >
+            Sign up &rarr;
+            <BottomGradient />
+          </button>)
+        }
 
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
@@ -76,7 +96,7 @@ export function SignupFormDemo() {
           <button
             className="flex justify-center relative group/btn space-x-2 items-center px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
             onClick={() => {
-                router.push("/auth/login");
+              router.push("/auth/login");
             }}
           >
             <span className="text-neutral-700 dark:text-neutral-300 text-sm">
@@ -87,7 +107,7 @@ export function SignupFormDemo() {
           <button
             className="flex justify-center relative group/btn space-x-2 items-center px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
             onClick={() => {
-                router.push("/mentor-login");
+              router.push("/mentor-login");
             }}
           >
             <span className="text-neutral-700 dark:text-neutral-300 text-sm">

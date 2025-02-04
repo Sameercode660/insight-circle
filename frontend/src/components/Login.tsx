@@ -1,13 +1,53 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 export function LoginupFormDemo() {
 
     const router = useRouter();
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
+
+    async function handleLogin() {
+      try {
+        
+        if(!email || !password) {
+          alert('Anyone field is empty')
+          return 
+        }
+
+        const data = {
+          email, 
+          password
+        }
+        setLoading(true)
+        const response = await axios.post('http://localhost:3000/api/user/auth/login', data)
+        setLoading(false)
+
+        console.log(response.data)
+
+        if(response.data.status === true) {
+          localStorage.setItem('id', response.data.data.id)
+          localStorage.setItem('name', response.data.data.name)
+          localStorage.setItem('isLogin', "true")
+          localStorage.setItem('email', response.data.data.email)
+          window.location.href = '/'
+        } else {
+          alert(response.data.message)
+        }
+      } catch (error) {
+        console.log(error)
+        alert('Unable to login')
+      } finally {
+        setLoading(false)
+      }
+    }
    
   return (
     <div className="mt-20 mb-20 max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
@@ -17,18 +57,26 @@ export function LoginupFormDemo() {
       <div className="my-8">
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">Email Address</Label>
-          <Input id="email" placeholder="projectmayhem@fc.com" type="email" />
+          <Input id="email" placeholder="projectmayhem@fc.com" value={email} onChange={(e) => setEmail(e.target.value)} type="email" />
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" placeholder="••••••••" type="password" />
+          <Input id="password" placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} type="password" />
         </LabelInputContainer>
-        <button
+        {
+          loading === false ? (<button
+            className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+            onClick={handleLogin}
+          >
+            Login &rarr;
+            <BottomGradient />
+          </button>) : (<button
           className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
         >
-          Login &rarr;
+          Loading... &rarr;
           <BottomGradient />
-        </button>
+        </button>)
+        }
 
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
