@@ -1,14 +1,51 @@
 'use client'
 
+import axios from 'axios';
 import React, { useState } from 'react';
 import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
 
 const Footer = () => {
     const [isAccordionOpen, setIsAccordionOpen] = useState(false);
 
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [loading, setLoading] = useState(false)
+
+    async function handleSubscribe() {
+        try {
+            if (!email || !name) {
+                alert('Anyone field is empty')
+                return
+            }
+
+            const data = {
+                name,
+                email
+            }
+
+            const response = await axios.post('http://localhost:3000/api/user/subscriber', data)
+
+            console.log(response.data)
+
+            if (response.data.status === true) {
+                alert('Subscribed Successfully')
+            } else {
+                alert(response.data.message)
+            }
+
+        } catch (error) {
+            console.log(error)
+            alert('Failed to subscribe')
+        } finally {
+            setLoading(false)
+        }
+    }
+
     const handleAccordionToggle = () => {
         setIsAccordionOpen(!isAccordionOpen);
     };
+
+
     return (
         <footer className="bg-gray-800 text-white py-10">
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -51,11 +88,13 @@ const Footer = () => {
 
                 <div className="flex flex-col">
                     <h2 className="text-xl font-bold mb-4">Subscribe to Our Newsletter</h2>
-                    <form className="flex flex-col space-y-4">
-                        <input type="text" placeholder="Your Name" className="p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
-                        <input type="email" placeholder="Your Email" className="p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
-                        <button type="submit" className="p-2 rounded bg-blue-500 hover:bg-blue-700 transition text-white font-bold">Subscribe</button>
-                    </form>
+                    <div className="flex flex-col space-y-4">
+                        <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your Name" className="p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
+                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Your Email" className="p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
+                        {
+                            loading === true ? (<button className="p-2 rounded bg-blue-500 hover:bg-blue-700 transition text-white font-bold">Loading...</button>) : (<button onClick={handleSubscribe} className="p-2 rounded bg-blue-500 hover:bg-blue-700 transition text-white font-bold">Subscribe</button>)
+                        }
+                    </div>
                 </div>
             </div>
             <div className="text-center mt-8 text-gray-400">
