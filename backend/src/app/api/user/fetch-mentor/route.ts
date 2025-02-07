@@ -23,6 +23,7 @@ export async function GET() {
             data: mentors
         })
     } catch (error) {
+        console.log(error)
         return NextResponse.json({
             statusCode: 500,
             message: 'Unable to run fetch subscriber',
