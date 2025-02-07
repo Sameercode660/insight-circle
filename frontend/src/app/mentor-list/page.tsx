@@ -7,8 +7,9 @@ import React, { useEffect, useState } from 'react'
 
 function page() {
     const router = useRouter()
-    const [data, setData] = useState()
+    const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
+
     useEffect(() => {
         // Access localStorage inside useEffect
         const isLogin = localStorage.getItem('isLogin');
@@ -36,15 +37,20 @@ function page() {
         <>
             <SectionHeading title='Chat with our mentors'></SectionHeading>
             <div className='flex justify-center items-center flex-wrap gap-5'>
-                <ThreeDCardDemo
-                    name='Anjana'
-                    bio="I am a full stack developer"
-                    expertIn='React'
-                    image='https://images.pexels.com/photos/10320391/pexels-photo-10320391.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load'
-                ></ThreeDCardDemo>
-               {
-                loading ?
-               }
+            {
+                loading === true ? <div>Loading</div> : (
+                    data?.map((item: any) => (
+                        <ThreeDCardDemo
+                            key={item.id}
+                            id={item.id}
+                            name={item.name}
+                            bio={item.bio}
+                            expertIn={item.expertIn}
+                            image={item.profilePicture}
+                        ></ThreeDCardDemo>
+                    ))
+                )
+            }
             </div>
         </>
     )

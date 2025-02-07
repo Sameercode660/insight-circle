@@ -48,7 +48,7 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <div>
       <ImagesSliderDemo></ImagesSliderDemo>
       <SectionHeading title="What we offer"></SectionHeading>
       <StickyScrollRevealDemo></StickyScrollRevealDemo>
@@ -61,6 +61,6 @@ export default function Home() {
       <TextRevealCardPreview></TextRevealCardPreview>
       <TypewriterEffectSmoothDemo></TypewriterEffectSmoothDemo>
       <CardHoverEffectDemo></CardHoverEffectDemo>
-    </>
+    </div>
   );
 }
