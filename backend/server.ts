@@ -37,33 +37,28 @@ app.prepare().then(() => {
       socket.emit("user-joined", userId);
     });
 
-    socket.on("send-message", async (reciverId, messageObject) => {
-      const reciver_socket_id = users.get(reciverId);
-      const sender_socket_id = users.get(messageObject.userId)
-      console.log(reciver_socket_id)
-      console.log(reciverId, messageObject)
-
-      // save message to db
-      const savedMessage = await prisma.message.create({
-        data: messageObject,
-      });
-      const sender = await prisma.user.findUnique({
-        where: {
-          id: messageObject.userId,
-        },
-      });
-      const reciver = await prisma.user.findUnique({
-        where: {
-          id: messageObject.mentorId,
-        },
-      });
-      console.log(users)
-      if (reciver_socket_id) {
-        io.to(reciver_socket_id).emit("receive-message", sender, reciver, savedMessage);
-      } else if (sender_socket_id) {
-        io.to(sender_socket_id).emit("receive-message", sender, reciver, messageObject);
-      } else {
-        console.error('Both sender_socket_id and reciver_socket_id are undefined.');
+    socket.on("send-message", async (reciverId, senderId, messageObject) => {
+      try {
+        // Save message to the database
+        const savedMessage = await prisma.message.create({
+          data: messageObject,
+          include: { user: true },
+        });
+    
+        // Emit message to both sender and receiver if connected
+        const reciver_socket_id = users.get(reciverId);
+        const sender_socket_id = users.get(senderId);
+    
+        if (reciver_socket_id) {
+          io.to(reciver_socket_id).emit("receive-message", savedMessage);
+        }
+    
+        if (sender_socket_id) {
+          io.to(sender_socket_id).emit("receive-message", savedMessage);
+        }
+      } catch (err) {
+        console.error("Error saving message:", err);
+        socket.emit("error", "Failed to save message");
       }
     });
 

@@ -37,6 +37,7 @@ export function LoginupFormDemo() {
           localStorage.setItem('name', response.data.data.name)
           localStorage.setItem('isLogin', "true")
           localStorage.setItem('email', response.data.data.email)
+          localStorage.setItem('loginAs', 'student')
           window.location.href = '/'
         } else {
           alert(response.data.message)

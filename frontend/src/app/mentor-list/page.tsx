@@ -1,5 +1,6 @@
 'use client'
 import SectionHeading from '@/components/Heading'
+import Loader from '@/components/Loader'
 import { ThreeDCardDemo } from '@/components/ThreeDCardDemo'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
@@ -38,7 +39,7 @@ function page() {
             <SectionHeading title='Chat with our mentors'></SectionHeading>
             <div className='flex justify-center items-center flex-wrap gap-5'>
             {
-                loading === true ? <div>Loading</div> : (
+                loading === true ? <Loader></Loader> : (
                     data?.map((item: any) => (
                         <ThreeDCardDemo
                             key={item.id}

@@ -45,6 +45,7 @@ const OTPInput: React.FC<OTPInputProps> = () => {
         localStorage.setItem('name', response.data.data.name);
         localStorage.setItem('isLogin', "true")
         localStorage.setItem('email', response.data.data.email)
+        localStorage.setItem('loginAs', 'student')
         alert('Sign Up Success');
         window.location.href = '/'
       } else {
