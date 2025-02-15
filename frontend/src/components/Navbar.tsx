@@ -27,11 +27,11 @@ const Navbar = () => {
   return (
     <nav className="bg-gray-900 text-white p-4 flex items-center justify-between shadow-lg">
       {/* Left Section */}
-      <div className="flex items-center space-x-8">
+      <div className="flex items-center space-x-8 ml-10">
         <img
-          src="/logo.png"
+          src="https://img.eselt.de/img/17221350_RK2awlKhubuVR2dA/ad.jpg"
           alt="Logo"
-          className="h-10 w-auto"
+          className="h-16 w-auto rounded-xl"
         />
       </div>
 
