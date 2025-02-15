@@ -31,7 +31,7 @@ const Navbar = () => {
         <img
           src="https://img.eselt.de/img/17221350_RK2awlKhubuVR2dA/ad.jpg"
           alt="Logo"
-          className="h-16 w-auto rounded-xl"
+          className="h-20 w-auto rounded-xl"
         />
       </div>
 

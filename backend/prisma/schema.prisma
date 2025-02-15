@@ -17,7 +17,6 @@ model User {
   planType      String          @default("FREE")
   planStartDate DateTime?
   planEndDate   DateTime?
-  Message       Message[]
   EngagedMentor EngagedMentor[]
   Subscription  Subscription[]
   createdAt     DateTime        @default(now())
@@ -44,7 +43,6 @@ model Mentor {
   isActive       Boolean         @default(true)
   expertIn       String
   mentorType     String          @default("FREE")
-  Message        Message[]
   EngagedMentor  EngagedMentor[]
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
@@ -53,10 +51,10 @@ model Mentor {
 model Message {
   id        String   @id @default(uuid())
   message   String
-  userId    String
-  mentorId  String
-  user      User     @relation(fields: [userId], references: [id])
-  mentor    Mentor   @relation(fields: [mentorId], references: [id])
+  senderName String 
+  receiverName String
+  senderId   String
+  receiverId  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

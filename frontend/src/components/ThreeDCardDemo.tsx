@@ -27,7 +27,7 @@ export function ThreeDCardDemo({id, name, bio, expertIn, image}: propTypes) {
 
   function handleJoinUser() {
     socket.emit("join-user", id)
-    router.push(`/${id}`)
+    router.push(`/${id}/${name}`)
   }
 
   return (

@@ -98,7 +98,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="text-center mt-8 text-gray-400">
-                &copy; 2023 Your Company. All rights reserved.
+                &copy; 2023 Insight Circle. All rights reserved.
             </div>
         </footer>
     );

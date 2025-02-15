@@ -18,7 +18,7 @@ const UserCard = ({ id, name }: { id: string, name: string }) => {
 
     function handleJoinUser() {
         socket.emit("join-user", id)
-        router.push(`/${id}`)
+        router.push(`/${id}/${name}`)
     }
 
 

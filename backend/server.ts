@@ -38,11 +38,11 @@ app.prepare().then(() => {
     });
 
     socket.on("send-message", async (reciverId, senderId, messageObject) => {
+      console.log(messageObject)
       try {
         // Save message to the database
         const savedMessage = await prisma.message.create({
           data: messageObject,
-          include: { user: true },
         });
     
         // Emit message to both sender and receiver if connected

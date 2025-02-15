@@ -33,9 +33,9 @@ function Page() {
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [inputText, setInputText] = useState('');
   const [loading, setLoading] = useState(true);
-  const { chat: receiverId } = useParams();
+  const { chat: receiverId, name: receiverName } = useParams();
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
-
+  console.log('receverId', receiverId, 'receiverName', decodeURIComponent(receiverName))
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -43,11 +43,13 @@ function Page() {
   const handleFetchMessages = async () => {
     try {
       const data = {
-        userId: localStorage.getItem('id'),
-        mentorId: receiverId,
+        senderId: localStorage.getItem('id'),
+        receiverId,
       };
+      console.log(data)
       setLoading(true);
       const response = await axios.post('http://localhost:3000/api/messages', data);
+      console.log(response.data)
       setMessages(response.data.data || []); // Ensure it defaults to an empty array if data is undefined
     } catch (error) {
       console.error(error);
@@ -74,19 +76,15 @@ function Page() {
   const handleSendMessage = () => {
     if (!inputText.trim()) return;
 
-    const messageObject =
-      localStorage.getItem('loginAs') === 'mentor'
-        ? {
-          message: inputText,
-          userId: receiverId,
-          mentorId: localStorage.getItem('id'),
-        }
-        : {
-          message: inputText,
-          userId: localStorage.getItem('id'),
-          mentorId: receiverId,
-        };
+    const messageObject = {
+      message: inputText,
+      senderName: localStorage.getItem('name'),
+      receiverName: decodeURIComponent(receiverName),
+      senderId: localStorage.getItem('id'),
+      receiverId
+    }
 
+    console.log(messageObject)
     socket.emit('send-message', receiverId, localStorage.getItem('id'), messageObject);
     setInputText('');
   };
@@ -99,11 +97,13 @@ function Page() {
         ) : messages.length === 0 ? ( // Properly handle empty messages
           <p>No messages found</p>
         ) : (
-          messages.map((msg, index) => (
+          messages.map((msg:any, index) => (
             <Message
               key={index}
-              senderId={msg.userId}
-              senderName={msg.user.name}
+              senderId={msg.senderId}
+              senderName={msg.senderName}
+              receiverName={msg.receiverName}
+              receiverId={msg.receiverId}
               messageText={msg.message}
               createdAt={msg.createdAt}
             />
