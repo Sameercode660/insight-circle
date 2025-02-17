@@ -20,18 +20,18 @@ const Message = ({
         }`}
       >
         {/* Sender's name */}
-        <div className="font-semibold mb-2 text-xs">
+        <div className="font-semibold mb-1 text-xs">
           {isUser ? "You" : senderName}
         </div>
 
         {/* Message text */}
-        <div className="whitespace-pre-wrap break-words">{messageText}</div>
+        <div className="whitespace-pre-wrap break-words mb-2">{messageText}</div>
 
         {/* Timestamp */}
         <div
-          className={`text-xs absolute ${
-            isUser ? "right-2 text-gray-300" : "left-2 text-gray-500"
-          } mt-2`}
+          className={`text-xs text-opacity-80 ${
+            isUser ? "text-gray-200" : "text-gray-500"
+          } text-right`}
         >
           {new Date(createdAt).toLocaleTimeString([], {
             hour: "2-digit",

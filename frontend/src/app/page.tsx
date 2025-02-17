@@ -61,6 +61,7 @@ export default function Home() {
       <TextRevealCardPreview></TextRevealCardPreview>
       <TypewriterEffectSmoothDemo></TypewriterEffectSmoothDemo>
       <CardHoverEffectDemo></CardHoverEffectDemo>
+      <Footer></Footer>
     </div>
   );
 }

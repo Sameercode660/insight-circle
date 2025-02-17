@@ -33,7 +33,11 @@ export function ImagesSliderDemo() {
           We are accountable to help you  <br /> in mentoring
         </motion.p>
         <button onClick={() => {
-          router.push('/mentor-list')
+          if(localStorage.getItem('loginAs') == 'mentor') {
+            router.push('/mentor-section')
+          } else {
+            router.push('/mentor-list')
+          }
         }} className="px-4 py-2 backdrop-blur-sm border bg-emerald-300/10 border-emerald-500/20 text-white mx-auto text-center rounded-full relative mt-4">
           <span>Get started →</span>
           <div className="absolute inset-x-0  h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-emerald-500 to-transparent" />
